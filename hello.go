@@ -8,6 +8,7 @@ const itHello = "Ciao"    // Italian
 const deHello = "Hallo"   // German
 const esHello = "Hola"    // Spanish
 
+// Coder's note: performance-wise, slices are best, then switches, maps last
 var helloMultilingualMap = map[string]string{
 	"en": enHello,
 	"fr": frHello,
@@ -31,5 +32,5 @@ func Hello(name string, language string) string {
 }
 
 func main() {
-	fmt.Println(Hello("world", "es"))
+	fmt.Println(Hello("world", ""))
 }
