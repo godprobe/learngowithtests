@@ -10,6 +10,7 @@ var helloMultilingualMap = map[string]string{
 	"es": esHello,
 }
 
+// Accepts any string for the name and an ISO 639-1 language code (as string)
 func Hello(name string, language string) string {
 	greeting := "Hello"
 	if name == "" {
