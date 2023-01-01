@@ -2,18 +2,27 @@ package main
 
 import "fmt"
 
-const englishHelloPrefix = "Hello, "
+const enHello = "Hello" // English
+const esHello = "Hola"  // Spanish
+
+var helloMultilingualMap = map[string]string{
+	"en": enHello,
+	"es": esHello,
+}
 
 func Hello(name string, language string) string {
+	greeting := "Hello"
 	if name == "" {
 		name = "World"
 	}
-	if language == "Spanish" {
-		return "Hola, " + name
+	for k, v := range helloMultilingualMap {
+		if language == k {
+			greeting = v
+		}
 	}
-	return englishHelloPrefix + name
+	return greeting + ", " + name
 }
 
 func main() {
-	fmt.Println(Hello("world", ""))
+	fmt.Println(Hello("world", "es"))
 }
