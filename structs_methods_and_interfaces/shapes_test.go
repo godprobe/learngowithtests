@@ -16,10 +16,10 @@ func TestArea(t *testing.T) {
 
 	areaTests := []struct {
 		shape Shape
-		want float64
+		want  float64
 	}{
-		{Rectangle{3.25, 12.5}, 40.625}
-		{Circle{5.625}, 99.401955054989551685732075799078}
+		{Rectangle{3.25, 12.5}, 40.625},
+		{Circle{5.625}, 99.401955054989551685732075799078},
 	}
 
 	for _, tt := range areaTests {
