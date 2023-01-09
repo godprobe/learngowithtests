@@ -14,21 +14,18 @@ func TestPerimeter(t *testing.T) {
 
 func TestArea(t *testing.T) {
 
-	checkArea := func(t testing.TB, shape Shape, want float64) {
-		t.Helper()
-		got := shape.Area()
-		if got != want {
-			t.Errorf("got %g, want %g", got, want)
-		}
+	areaTests := []struct {
+		shape Shape
+		want float64
+	}{
+		{Rectangle{3.25, 12.5}, 40.625}
+		{Circle{5.625}, 99.401955054989551685732075799078}
 	}
 
-	t.Run("rectangles", func(t *testing.T) {
-		rectangle := Rectangle{3.25, 12.5}
-		checkArea(t, rectangle, 40.625)
-	})
-
-	t.Run("circles", func(t *testing.T) {
-		circle := Circle{5.625}
-		checkArea(t, circle, 99.401955054989551685732075799078)
-	})
+	for _, tt := range areaTests {
+		got := tt.shape.Area()
+		if got != tt.want {
+			t.Errorf("got %g, want %g", got, tt.want)
+		}
+	}
 }
