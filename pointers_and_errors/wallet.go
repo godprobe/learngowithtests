@@ -2,15 +2,24 @@ package main
 
 import "fmt"
 
+type Digidollar int
+
 type Wallet struct {
-	balance int
+	balance Digidollar
 }
 
-func (w Wallet) Deposit(amount int) {
-	fmt.Printf("address of balance in Deposit is %v \n", &w.balance)
+func (w *Wallet) Deposit(amount Digidollar) {
 	w.balance += amount
 }
 
-func (w Wallet) Balance() int {
+func (w *Wallet) Balance() Digidollar {
 	return w.balance
+}
+
+type Stringer interface {
+	String() string
+}
+
+func (d Digidollar) String() string {
+	return fmt.Sprintf("%d DGD", d)
 }
