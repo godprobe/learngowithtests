@@ -13,7 +13,7 @@ func (w *Wallet) Deposit(amount Digidollar) {
 }
 
 func (w *Wallet) Withdraw(amount Digidollar) {
-
+	w.balance -= amount
 }
 
 func (w *Wallet) Balance() Digidollar {
