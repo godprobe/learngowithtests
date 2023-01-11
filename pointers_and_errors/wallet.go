@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Digidollar int
 
@@ -13,6 +16,9 @@ func (w *Wallet) Deposit(amount Digidollar) {
 }
 
 func (w *Wallet) Withdraw(amount Digidollar) error {
+	if amount > w.balance {
+		return errors.New("transaction declined; insufficient funds")
+	}
 	w.balance -= amount
 	return nil
 }
