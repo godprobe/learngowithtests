@@ -15,9 +15,11 @@ func (w *Wallet) Deposit(amount Digidollar) {
 	w.balance += amount
 }
 
+var ErrInsufficientFunds = errors.New("transaction declined, insufficient funds")
+
 func (w *Wallet) Withdraw(amount Digidollar) error {
 	if amount > w.balance {
-		return errors.New("transaction declined; insufficient funds")
+		return ErrInsufficientFunds
 	}
 	w.balance -= amount
 	return nil
