@@ -14,15 +14,16 @@ func TestSearch(t *testing.T) {
 	})
 
 	t.Run("Non-existent query", func(t *testing.T) {
-		_, err := dictionary.Search("404")
-		want := "Not found"
-
-		if err == nil {
-			t.Fatal("expected to get an error.")
-		}
-
-		assertStrings(t, err.Error(), want)
+		_, got := dictionary.Search("404")
+		assertError(t, got, ErrNotFound)
 	})
+}
+
+func assertError(t testing.TB, got, want error) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got error %q, want %q", got, want)
+	}
 }
 
 func assertStrings(t testing.TB, got, want string) {
