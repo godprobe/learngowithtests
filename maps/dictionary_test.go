@@ -46,10 +46,12 @@ func assertStrings(t testing.TB, got, want string) {
 func assertDefinition(t testing.TB, d Dictionary, query, definition string) {
 	t.Helper()
 
-	got := d[query]
-	want := definition
+	got, err := d.Search(query)
+	if err != nil {
+		t.Fatal("should find added word:", err)
+	}
 
-	if got != want {
-		t.Errorf("got %q, want %q", got, want)
+	if definition != got {
+		t.Errorf("got %q, want %q", got, definition)
 	}
 }
