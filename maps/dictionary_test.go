@@ -45,14 +45,27 @@ func TestAdd(t *testing.T) {
 }
 
 func TestUpdate(t *testing.T) {
-	entry := "test"
-	definitionToBeReplaced := "this definition should be replaced"
-	replacementDefinition := "this is the replacement definition"
+	t.Run("Update: entry exists", func(t *testing.T) {
+		entry := "test"
+		definitionToBeReplaced := "this definition should be replaced"
+		dictionary := Dictionary{entry: definitionToBeReplaced}
+		replacementDefinition := "this is the replacement definition"
 
-	d := Dictionary{entry: definitionToBeReplaced}
-	d.Update(entry, replacementDefinition)
+		err := dictionary.Update(entry, replacementDefinition)
 
-	assertDefinition(t, d, entry, replacementDefinition)
+		assertError(t, err, nil)
+		assertDefinition(t, dictionary, entry, replacementDefinition)
+	})
+
+	t.Run("Update: entry does not exist", func(t *testing.T) {
+		entry := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{}
+
+		err := dictionary.Update(entry, definition)
+
+		assertError(t, err, ErrDoesNotExist)
+	})
 }
 
 func assertError(t testing.TB, got, want error) {
