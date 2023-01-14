@@ -16,6 +16,10 @@ func (d Dictionary) Search(query string) (string, error) {
 }
 
 func (d Dictionary) Add(entry string, definition string) error {
+	_, exists := d[entry]
+	if exists {
+		return ErrAlreadyExists
+	}
 	d[entry] = definition
 	return nil
 }

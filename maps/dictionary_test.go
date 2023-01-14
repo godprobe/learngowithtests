@@ -39,8 +39,8 @@ func TestAdd(t *testing.T) {
 			query: initialDefinition,
 		}
 		addDefinition := "this is a second entry for test"
-
 		err := dictionary.Add(query, addDefinition)
+
 		assertError(t, err, ErrAlreadyExists)
 		assertDefinition(t, dictionary, query, initialDefinition)
 	})
