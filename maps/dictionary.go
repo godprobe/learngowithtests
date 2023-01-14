@@ -16,10 +16,16 @@ func (d Dictionary) Search(query string) (string, error) {
 }
 
 func (d Dictionary) Add(entry string, definition string) error {
-	_, exists := d[entry]
-	if exists {
+	_, err := d.Search(entry)
+
+	switch err {
+	case ErrNotFound:
+		d[entry] = definition
+	case nil:
 		return ErrAlreadyExists
+	default:
+		return err
 	}
-	d[entry] = definition
+
 	return nil
 }
