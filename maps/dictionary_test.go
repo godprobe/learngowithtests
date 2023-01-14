@@ -35,15 +35,27 @@ func TestAdd(t *testing.T) {
 		query := "test"
 		initialDefinition := "this is the first entry for test"
 
-		dictionary := Dictionary{
-			query: initialDefinition,
-		}
+		dictionary := Dictionary{query: initialDefinition}
 		addDefinition := "this is a second entry for test"
 		err := dictionary.Add(query, addDefinition)
 
 		assertError(t, err, ErrAlreadyExists)
 		assertDefinition(t, dictionary, query, initialDefinition)
 	})
+}
+
+func TestUpdate(t *testing.T) {
+	entry := "test"
+	definitionToBeReplaced := "this definition should be replaced"
+	replacementDefinition := "this is the replacement definition"
+
+	d := Dictionary{entry: definitionToBeReplaced}
+	d.Update(entry, replacementDefinition)
+
+	got, _ := d.Search("test")
+	if got != replacementDefinition {
+		t.Errorf("got %q, want %q", got, replacementDefinition)
+	}
 }
 
 func assertError(t testing.TB, got, want error) {
