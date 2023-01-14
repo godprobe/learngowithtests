@@ -52,10 +52,7 @@ func TestUpdate(t *testing.T) {
 	d := Dictionary{entry: definitionToBeReplaced}
 	d.Update(entry, replacementDefinition)
 
-	got, _ := d.Search("test")
-	if got != replacementDefinition {
-		t.Errorf("got %q, want %q", got, replacementDefinition)
-	}
+	assertDefinition(t, d, entry, replacementDefinition)
 }
 
 func assertError(t testing.TB, got, want error) {
