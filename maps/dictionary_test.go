@@ -20,13 +20,30 @@ func TestSearch(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	dictionary := Dictionary{}
-	query := "word"
-	definition := "this is just a test"
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		query := "word"
+		definition := "this is just a test"
 
-	dictionary.Add(query, definition)
+		err := dictionary.Add(query, definition)
 
-	assertDefinition(t, dictionary, query, definition)
+		assertError(t, err, nil)
+		assertDefinition(t, dictionary, query, definition)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		query := "test"
+		initialDefinition := "this is the first entry for test"
+
+		dictionary := Dictionary{
+			query: initialDefinition,
+		}
+		addDefinition := "this is a second entry for test"
+
+		err := dictionary.Add(query, addDefinition)
+		assertError(t, err, ErrAlreadyExists)
+		assertDefinition(t, dictionary, query, initialDefinition)
+	})
 }
 
 func assertError(t testing.TB, got, want error) {
