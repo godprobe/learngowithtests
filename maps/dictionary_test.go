@@ -68,7 +68,7 @@ func TestUpdate(t *testing.T) {
 	})
 }
 
-func testDelete(t *testing.T) {
+func TestDelete(t *testing.T) {
 	entry := "test"
 	definition := "this is just a test"
 	dictionary := Dictionary{entry: definition}
