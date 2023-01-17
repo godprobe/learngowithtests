@@ -51,3 +51,7 @@ func (d Dictionary) Update(entry, definition string) error {
 
 	return nil
 }
+
+func (d Dictionary) Delete(entry string) {
+	delete(d, entry)
+}
