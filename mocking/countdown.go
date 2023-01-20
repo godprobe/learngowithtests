@@ -10,6 +10,10 @@ import (
 const finalWord = "Go!"
 const countdownStart = 3
 
+type Sleeper interface {
+	Sleep()
+}
+
 type DefaultSleeper struct{}
 
 func (d *DefaultSleeper) Sleep() {
