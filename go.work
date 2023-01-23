@@ -9,5 +9,6 @@ use (
 	./maps
 	./mocking
 	./pointers_and_errors
+	./select
 	./structs_methods_and_interfaces
 )
