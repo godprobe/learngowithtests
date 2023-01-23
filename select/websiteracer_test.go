@@ -17,6 +17,7 @@ func TestRacer(t *testing.T) {
 		w.WriteHeader(http.StatusOK)
 	}))
 	fastServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(200 * time.Millisecond)
 		w.WriteHeader(http.StatusOK)
 	}))
 
