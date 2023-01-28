@@ -1,6 +1,8 @@
 package reflection
 
-import "reflect"
+import (
+	"reflect"
+)
 
 func walk(x interface{}, fn func(input string)) {
 	// walk the interface, find all strings, run the func on all the found strings
@@ -8,6 +10,8 @@ func walk(x interface{}, fn func(input string)) {
 
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
-		fn(field.String())
+		if field.Kind() == reflect.String {
+			fn(field.String())
+		}
 	}
 }
