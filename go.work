@@ -12,4 +12,5 @@ use (
 	./reflection
 	./select
 	./structs_methods_and_interfaces
+	./sync
 )
