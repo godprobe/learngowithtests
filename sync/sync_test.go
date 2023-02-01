@@ -11,8 +11,12 @@ func TestAsyncCounter(t *testing.T) {
 		counter.Inc()
 		counter.Inc()
 
-		if counter.Value() != 3 {
-			t.Errorf("got %d, want %d", counter.Value(), 3)
-		}
+		assertCount(t, counter, 3)
 	})
+}
+
+func assertCount(t *testing.T, c Counter, count int) {
+	if c.Value() != count {
+		t.Errorf("got %d, want %d", c.Value(), count)
+	}
 }
