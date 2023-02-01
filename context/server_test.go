@@ -1,6 +1,10 @@
 package busyserver
 
-import "testing"
+import (
+	"net/http"
+	"net/http/httptest"
+	"testing"
+)
 
 type StubStore struct {
 	response string
@@ -23,4 +27,3 @@ func TestServer(t *testing.T) {
 		t.Errorf(`got "%s", want "%s"`, response.Body.String(), data)
 	}
 }
-

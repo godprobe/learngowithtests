@@ -1,6 +1,9 @@
 package busyserver
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 type Store interface {
 	Fetch() string
@@ -11,4 +14,3 @@ func Server(store Store) http.HandlerFunc {
 		fmt.Fprint(w, store.Fetch())
 	}
 }
-
