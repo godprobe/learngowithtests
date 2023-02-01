@@ -1,6 +1,9 @@
 package async_counter
 
-import "testing"
+import (
+	"sync"
+	"testing"
+)
 
 // Concurrency-safe counter.
 
@@ -12,6 +15,24 @@ func TestAsyncCounter(t *testing.T) {
 		counter.Inc()
 
 		assertCount(t, counter, 3)
+	})
+
+	t.Run("it runs safely concurrently", func(t *testing.T) {
+		wantedCount := 1000
+		counter := Counter{}
+
+		var wg sync.WaitGroup
+		wg.Add(wantedCount)
+
+		for i := 0; i < wantedCount; i++ {
+			go func() {
+				counter.Inc()
+				wg.Done()
+			}()
+		}
+		wg.Wait()
+
+		assertCount(t, counter, wantedCount)
 	})
 }
 
