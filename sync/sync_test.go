@@ -9,7 +9,7 @@ import (
 
 func TestAsyncCounter(t *testing.T) {
 	t.Run("incrementing the counter three times leaves it at 3", func(t *testing.T) {
-		counter := Counter{}
+		counter := NewCounter()
 		counter.Inc()
 		counter.Inc()
 		counter.Inc()
@@ -19,7 +19,7 @@ func TestAsyncCounter(t *testing.T) {
 
 	t.Run("it runs safely concurrently", func(t *testing.T) {
 		wantedCount := 1000
-		counter := Counter{}
+		counter := NewCounter()
 
 		var wg sync.WaitGroup
 		wg.Add(wantedCount)
@@ -36,7 +36,7 @@ func TestAsyncCounter(t *testing.T) {
 	})
 }
 
-func assertCount(t *testing.T, c Counter, count int) {
+func assertCount(t *testing.T, c *Counter, count int) {
 	if c.Value() != count {
 		t.Errorf("got %d, want %d", c.Value(), count)
 	}
