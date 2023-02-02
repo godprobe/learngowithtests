@@ -14,6 +14,19 @@ func (s *StubStore) Fetch() string {
 	return s.response
 }
 
+type SpyStore struct {
+	response string
+	cancelled bool
+}
+
+func (s *SpyStore) Fetch() string {
+	time.SLeep(100 * time.Millisecond)
+	return s.response
+}
+func (s *SpyStore) Cancel() {
+	s.cancelled = true
+}
+
 func TestServer(t *testing.T) {
 	data := "hello, world"
 	svr := Server(&StubStore{data})
