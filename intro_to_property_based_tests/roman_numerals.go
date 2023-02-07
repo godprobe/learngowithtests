@@ -1,5 +1,5 @@
 package property_based
 
-func ConvertToRoman(num int) string {
+func ConvertToRoman(arabic int) string {
 	return "I"
 }
