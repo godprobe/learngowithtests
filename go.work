@@ -6,6 +6,7 @@ use (
 	./context
 	./dependency_injection
 	./hello_world
+	./intro_to_property_based_tests
 	./iteration
 	./maps
 	./mocking
