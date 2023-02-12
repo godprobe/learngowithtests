@@ -9,6 +9,7 @@ use (
 	./intro_to_property_based_tests
 	./iteration
 	./maps
+	./maths
 	./mocking
 	./pointers_and_errors
 	./reflection
