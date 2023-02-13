@@ -1,5 +1,12 @@
 package clockface_test
 
+import (
+	"testing"
+	"time"
+
+	"clockface"
+)
+
 func TestSecondHandAtMidnight(t *testing.T) {
 	tm := time.Date(1337, time.January, 1, 0, 0, 0, 0, time.UTC)
 

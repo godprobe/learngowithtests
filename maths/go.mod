@@ -1,3 +1,3 @@
-module maths
+module clockface
 
 go 1.19
