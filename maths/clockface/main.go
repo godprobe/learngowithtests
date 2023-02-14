@@ -18,7 +18,7 @@ func main() {
 }
 
 func secondHandTag(p clockface.Point) string {
-	return fmt.Sprintf(`<line x1="150" y1="150" x2="%f" y2="%f" style="fill:none;strike:#f00;stroke-width:3px;"/>`, p.X, p.Y)
+	return fmt.Sprintf(`<line x1="150" y1="150" x2="%f" y2="%f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, p.X, p.Y)
 }
 
 const svgStart = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
