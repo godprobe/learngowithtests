@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+const secondHandLength = 90
+const clockCenterX = 150
+const clockCenterY = 150
+
 type Point struct {
 	X float64
 	Y float64
@@ -14,9 +18,9 @@ type Point struct {
 // an analogue clock at time `t` represented as a point.
 func SecondHand(t time.Time) Point {
 	p := secondHandPoint(t)
-	p = Point{p.X * 90, p.Y * 90}   // scale
-	p = Point{p.X, -p.Y}            // flip
-	p = Point{p.X + 150, p.Y + 150} // translate
+	p = Point{p.X * secondHandLength, p.Y * secondHandLength} // scale
+	p = Point{p.X, -p.Y}                                      // flip
+	p = Point{p.X + clockCenterX, p.Y + clockCenterY}         // translate
 	return p
 }
 
