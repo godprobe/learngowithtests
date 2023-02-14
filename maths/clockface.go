@@ -1,6 +1,7 @@
 package clockface
 
 import (
+	"math"
 	"time"
 )
 
@@ -14,5 +15,5 @@ func SecondHand(t time.Time) Point {
 }
 
 func secondsInRadians(t time.Time) float64 {
-	return 0
+	return math.Pi
 }
