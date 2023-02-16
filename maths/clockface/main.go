@@ -1,9 +1,10 @@
 package main
 
 import (
-	"clockface"
 	"os"
 	"time"
+
+	"clockface"
 )
 
 func main() {
