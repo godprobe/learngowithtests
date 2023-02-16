@@ -5,9 +5,11 @@ import (
 	"time"
 )
 
-const secondHandLength = 90
-const clockCenterX = 150
-const clockCenterY = 150
+const (
+	secondHandLength = 90
+	clockCenterX     = 150
+	clockCenterY     = 150
+)
 
 type Point struct {
 	X float64
