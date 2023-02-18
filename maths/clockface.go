@@ -34,7 +34,7 @@ func minuteHand(w io.Writer, t time.Time) {
 	p = Point{p.X * minuteHandLength, p.Y * minuteHandLength} // scale
 	p = Point{p.X, -p.Y}                                      // flip
 	p = Point{p.X + clockCenterX, p.Y + clockCenterY}         // transform
-	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, p.X, p.Y)
+	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#000;stroke-width:3px;"/>`, p.X, p.Y)
 }
 
 func secondsInRadians(t time.Time) float64 {
