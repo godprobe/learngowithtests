@@ -9,28 +9,6 @@ import (
 	"clockface"
 )
 
-func TestSecondHandAtMidnight(t *testing.T) {
-	tm := time.Date(1337, time.January, 1, 0, 0, 0, 0, time.UTC)
-
-	want := clockface.Point{X: 150, Y: 150 - 90}
-	got := clockface.SecondHand(tm)
-
-	if got != want {
-		t.Errorf("Got %v, wanted %v", got, want)
-	}
-}
-
-func TestSecondHandAt30Seconds(t *testing.T) {
-	tm := time.Date(1337, time.January, 1, 0, 0, 30, 0, time.UTC)
-
-	want := clockface.Point{X: 150, Y: 150 + 90}
-	got := clockface.SecondHand(tm)
-
-	if got != want {
-		t.Errorf("Got %v, wanted %v", got, want)
-	}
-}
-
 // SVG was generated 2023-02-15 22:24:47 by https://xml-to-go.github.io/ in Ukraine.
 // and susequently modified by the author
 type SVG struct {
@@ -107,35 +85,30 @@ func TestSVGWriterSecondHand(t *testing.T) {
 	}
 }
 
-// func TestSVGWriterMinuteHand(t *testing.T) {
-// 	cases := []struct {
-// 		time time.Time
-// 		line Line
-// 	}{
-// 		{
-// 			simpleTime(0, 0, 0),
-// 			Line{150, 150, 150, 70},
-// 		},
-// 	}
+func TestSVGWriterMinuteHand(t *testing.T) {
+	cases := []struct {
+		time time.Time
+		line Line
+	}{
+		{
+			simpleTime(0, 0, 0),
+			Line{150, 150, 150, 70},
+		},
+	}
 
-// 	for _, c := range cases {
-// 		t.Run(testName(c.time), func(t *testing.T) {
-// 			b := bytes.Buffer{}
-// 			clockface.SVGWriter(&b, c.time)
+	for _, c := range cases {
+		t.Run(testName(c.time), func(t *testing.T) {
+			b := bytes.Buffer{}
+			clockface.SVGWriter(&b, c.time)
 
-// 			svg := SVG{}
-// 			xml.Unmarshal(b.Bytes(), &svg)
+			svg := SVG{}
+			xml.Unmarshal(b.Bytes(), &svg)
 
-// 			if !containsLine(c.line, svg.Line) {
-// 				t.Errorf("Expected to find the minute hand line %+v, in the SVG lines %+v", c.line, svg.Line)
-// 			}
-// 		})
-// 	}
-// }
-
-func testName(t time.Time) string {
-	// 	return ("Testing second hand at time %v:%v and %v seconds", t.Hour, t.Minute, t.Second)
-	return "Testing"
+			if !containsLine(c.line, svg.Line) {
+				t.Errorf("Expected to find the minute hand line %+v, in the SVG lines %+v", c.line, svg.Line)
+			}
+		})
+	}
 }
 
 func containsLine(l Line, ls []Line) bool {
@@ -145,6 +118,11 @@ func containsLine(l Line, ls []Line) bool {
 		}
 	}
 	return false
+}
+
+func testName(t time.Time) string {
+	// 	return ("Testing second hand at time %v:%v and %v seconds", t.Hour, t.Minute, t.Second)
+	return "Testing"
 }
 
 func simpleTime(hours, minutes, seconds int) time.Time {
