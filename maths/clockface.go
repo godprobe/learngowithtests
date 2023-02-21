@@ -10,6 +10,7 @@ import (
 const (
 	secondHandLength = 90
 	minuteHandLength = 80
+	hourHandLength   = 70
 	clockCenterX     = 150
 	clockCenterY     = 150
 )
@@ -19,8 +20,6 @@ type Point struct {
 	Y float64
 }
 
-// SecondHand is the unit vector of the second hand of
-// an analogue clock at time `t` represented as a point.
 func secondHand(w io.Writer, t time.Time) {
 	p := makeHand(secondHandPoint(t), secondHandLength)
 	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#f00;stroke-width:2.5px;"/>`, p.X, p.Y)
