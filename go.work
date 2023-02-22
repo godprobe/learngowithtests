@@ -12,6 +12,7 @@ use (
 	./maths
 	./mocking
 	./pointers_and_errors
+	./reading_files
 	./reading_files/blogposts
 	./reflection
 	./select

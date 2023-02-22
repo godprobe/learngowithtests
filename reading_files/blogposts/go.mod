@@ -1,3 +1,3 @@
-module github.com/godprobe/learngowithtests/reading_files/blogposts
+module blogposts
 
-go 1.18
+go 1.20
