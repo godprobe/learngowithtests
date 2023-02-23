@@ -51,9 +51,8 @@ func minutesInRadians(t time.Time) float64 {
 }
 
 func hoursInRadians(t time.Time) float64 {
-	return (secondsInRadians(t)/60 +
-		minutesInRadians(t)/60 +
-		(math.Pi / (6 / float64(t.Hour()))))
+	return (minutesInRadians(t) / 12) +
+		(math.Pi / (6 / float64(t.Hour()%12)))
 }
 
 func secondHandPoint(t time.Time) Point {
