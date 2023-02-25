@@ -19,6 +19,7 @@ func TestNewBlogPost(t *testing.T) {
 	}
 
 	posts, err := blogposts.NewPostsFromFS(fs)
+	// _, err := blogposts.NewPostsFromFS(StubFailingFS{})
 
 	if err != nil {
 		t.Fatal(err)
@@ -29,6 +30,6 @@ func TestNewBlogPost(t *testing.T) {
 	}
 }
 
-func (s StubFailingFS) Open(nam string) (fs.File, error) {
+func (s StubFailingFS) Open(name string) (fs.File, error) {
 	return nil, errors.New("oh no, I always fail")
 }
