@@ -3,6 +3,7 @@ package blogposts
 import "io/fs"
 
 type Post struct {
+	Title string
 }
 
 func NewPostsFromFS(fileSystem fs.FS) ([]Post, error) {
