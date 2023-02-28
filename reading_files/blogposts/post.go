@@ -10,6 +10,11 @@ type Post struct {
 	Description string
 }
 
+const (
+	titleSeparator       = "Title: "
+	descriptionSeparator = "Description: "
+)
+
 func newPost(postFile io.Reader) (Post, error) {
 	scanner := bufio.NewScanner(postFile)
 
@@ -18,8 +23,8 @@ func newPost(postFile io.Reader) (Post, error) {
 		return scanner.Text()
 	}
 
-	title := readLine()[7:]        // remove "Title: "
-	description := readLine()[13:] // remove "Description: "
+	title := readLine()[len(titleSeparator):]
+	description := readLine()[len(descriptionSeparator):]
 
 	return Post{Title: title, Description: description}, nil
 }
