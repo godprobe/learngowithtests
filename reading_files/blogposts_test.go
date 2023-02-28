@@ -20,7 +20,7 @@ Description: Description 1
 Tags: tdd, go`
 		secondBody = `Title: Post 2
 Description: Description 2
-Tags: tdd, go`
+Tags: rust, borrow-checker`
 	)
 
 	fs := fstest.MapFS{
@@ -42,7 +42,7 @@ Tags: tdd, go`
 	assertPost(t, posts[0], blogposts.Post{
 		Title:       "Post 1",
 		Description: "Description 1",
-		Tags:        "tdd, go",
+		Tags:        []string{"tdd", "go"},
 	})
 }
 
