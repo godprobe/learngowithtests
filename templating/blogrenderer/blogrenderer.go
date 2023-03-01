@@ -1,12 +1,14 @@
 package blogrenderer
 
-import "bytes"
+import (
+	"io"
+)
 
 type Post struct {
 	Title, Body, Description string
 	Tags                     []string
 }
 
-func Render(buf *bytes.Buffer, post Post) error {
+func Render(w io.Writer, post Post) error {
 	return nil
 }
