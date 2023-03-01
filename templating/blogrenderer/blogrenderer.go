@@ -1,6 +1,7 @@
 package blogrenderer
 
 import (
+	"fmt"
 	"io"
 )
 
@@ -9,8 +10,8 @@ type Post struct {
 	Tags                     []string
 }
 
-func Render(w io.Writer, post Post) error {
+func Render(w io.Writer, p Post) error {
 	// write data to w
-	w.Write([]byte("<h1>hello world</h1>"))
-	return nil
+	_, err := fmt.Fprintf(w, "<h1>%s</h1>", p.Title)
+	return err
 }
