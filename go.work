@@ -19,4 +19,5 @@ use (
 	./structs_methods_and_interfaces
 	./sync
 	./templating
+	./templating/blogrenderer
 )

@@ -3,6 +3,8 @@ package blogrenderer_test
 import (
 	"bytes"
 	"testing"
+
+	"blogrenderer"
 )
 
 func TestRender(t *testing.T) {
