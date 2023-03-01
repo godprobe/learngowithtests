@@ -18,4 +18,5 @@ use (
 	./select
 	./structs_methods_and_interfaces
 	./sync
+	./templating
 )
