@@ -37,10 +37,10 @@ func newPost(postBody io.Reader) (Post, error) {
 
 	buf := bytes.Buffer{}
 	// print all remaining lines into a buffer
-	for scanner.Scan() {
-		fmt.Fprintln(&buf, scanner.Text())
+	for scanner.Scan() { // returns true if there's more data to scan
+		fmt.Fprintln(&buf, scanner.Text()) // preserves newlines
 	}
-	body := strings.TrimSuffix(buf.String(), "\n") // remove newline
+	body := strings.TrimSuffix(buf.String(), "\n") // remove trailing newline
 
 	return Post{
 		Title:       title,
