@@ -51,7 +51,8 @@ Tags: <ul>`)
 			for _, tag := range post.Tags {
 				want += fmt.Sprintf(`<li>%s</li>`, tag)
 			}
-			want += fmt.Sprint(`</ul>`)
+			want += fmt.Sprint(`</ul>
+`)
 			if got != want {
 				t.Errorf("got '%s' want '%s'", got, want)
 			}
