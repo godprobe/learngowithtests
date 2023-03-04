@@ -2,10 +2,11 @@ package blogrenderer_test
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
 
 	"blogrenderer"
+
+	approvals "github.com/approvals/go-approval-tests"
 )
 
 var (
@@ -42,17 +43,20 @@ func TestRender(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			got := buf.String()
-			want := fmt.Sprintf("<h1>%s</h1>\r\n", post.Title)
-			want += fmt.Sprintf("<p>%s</p>\r\n", post.Description)
-			want += "Tags: <ul>"
-			for _, tag := range post.Tags {
-				want += fmt.Sprintf("<li>%s</li>", tag)
-			}
-			want += "</ul>"
-			if got != want {
-				t.Errorf("got '%s' want '%s'", got, want)
-			}
+			// got := buf.String()
+			// want := fmt.Sprintf("<h1>%s</h1>\r\n", post.Title)
+			// want += fmt.Sprintf("<p>%s</p>\r\n", post.Description)
+			// want += "Tags: <ul>"
+			// for _, tag := range post.Tags {
+			// 	want += fmt.Sprintf("<li>%s</li>", tag)
+			// }
+			// want += "</ul>"
+			// if got != want {
+			// 	t.Errorf("got '%s' want '%s'", got, want)
+			// }
+
+			approvals.VerifyString(t, buf.String())
 		})
 	}
+
 }
