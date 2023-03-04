@@ -43,15 +43,13 @@ func TestRender(t *testing.T) {
 			}
 
 			got := buf.String()
-			want := fmt.Sprintf(`<h1>%s</h1>`, post.Title)
-			want += fmt.Sprintf(`
-<p>%s</p>`, post.Description)
-			want += fmt.Sprint(`
-Tags: <ul>`)
+			want := fmt.Sprintf("<h1>%s</h1>\n", post.Title)
+			want += fmt.Sprintf("<p>%s</p>\n", post.Description)
+			want += "Tags: <ul>"
 			for _, tag := range post.Tags {
-				want += fmt.Sprintf(`<li>%s</li>`, tag)
+				want += fmt.Sprintf("<li>%s</li>", tag)
 			}
-			want += fmt.Sprint(`</ul>`)
+			want += "</ul>"
 			if got != want {
 				t.Errorf("got '%s' want '%s'", got, want)
 			}
