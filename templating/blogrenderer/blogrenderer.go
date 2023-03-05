@@ -17,11 +17,11 @@ type Post struct {
 }
 
 func Render(w io.Writer, p Post) error {
-	// write data to w
 	templ, err := template.ParseFS(postTemplates, "templates/*.gohtml")
 	if err != nil {
 		return err
 	}
+
 	if err := templ.Execute(w, p); err != nil {
 		return err
 	}
