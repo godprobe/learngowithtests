@@ -38,9 +38,14 @@ func TestRender(t *testing.T) {
 	for _, post := range cases {
 		t.Run("convert a single post into HTML", func(t *testing.T) {
 			buf.Reset()
-			err := blogrenderer.Render(&buf, post)
+			postRenderer, err := blogrenderer.NewPostRenderer()
+			// postRenderer, err := blogrenderer.Render(&buf, post)
 
 			if err != nil {
+				t.Fatal(err)
+			}
+
+			if err := postRenderer.Render(&buf, post); err != nil {
 				t.Fatal(err)
 			}
 
@@ -59,7 +64,6 @@ func TestRender(t *testing.T) {
 			approvals.VerifyString(t, buf.String())
 		})
 	}
-
 }
 
 func BenchmarkRender(b *testing.B) {
@@ -72,8 +76,14 @@ func BenchmarkRender(b *testing.B) {
 		}
 	)
 
+	postRenderer, err := blogrenderer.NewPostRenderer()
+
+	if err != nil {
+		b.Fatal(err)
+	}
+
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		blogrenderer.Render(io.Discard, aPost)
+		postRenderer.Render(io.Discard, aPost)
 	}
 }
