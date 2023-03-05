@@ -1,5 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My amazing blog!</title>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="A fake blog for learning html templates in golang" lang="en"/>
+</head>
+<body>
+<nav role="navigation">
+    <div>
+        <h1>godprobe's golang learngowithtests blog<h1>
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="about">about</a></li>
+            <li><a href="archive">archive</a></li>
+        </ul>
+    </div>
+</nav>
+<main>
 <h1>hello world</h1>
 
 <p>This is a description</p>
 
 Tags: <ul><li>go</li><li>tdd</li></ul>
+</main>
+<footer>
+    <ul>
+        <li><a href="https://example.com/sociallink">Social Link</a></li>
+        <li><a href="https://github.com/godprobe">GitHub</a></li>
+    </ul>
+</footer>
+</body>
+</html>
