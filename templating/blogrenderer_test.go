@@ -69,14 +69,14 @@ func TestRender(t *testing.T) {
 	t.Run("render the index of posts", func(t *testing.T) {
 		buf.Reset()
 
-		posts := []blogrenderer.Post({Title: "Hello world"}, {Title: "Hello again"})
+		posts := []blogrenderer.Post{{Title: "Hello world"}, {Title: "Hello again"}}
 
 		if err := postRenderer.RenderIndex(&buf, posts); err != nil {
 			t.Fatal(err)
 		}
 
 		got := buf.String()
-		want := '<ol><li><a href="/posts/hello-world">Hello worldM/a></li><li><a href="/posts/hello-again">Hello again</a></li></ol>'
+		want := `<ol><li><a href="/posts/hello-world">Hello world</a></li><li><a href="/posts/hello-again">Hello again</a></li></ol>`
 		if got != want {
 			t.Errorf("got %q, want %q", got, want)
 		}
