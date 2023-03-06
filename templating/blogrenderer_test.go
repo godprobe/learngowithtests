@@ -68,6 +68,10 @@ func TestRender(t *testing.T) {
 	// INDEX RENDERER
 	t.Run("render the index of posts", func(t *testing.T) {
 		buf.Reset()
+		postRenderer, err := blogrenderer.NewPostRenderer()
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		posts := []blogrenderer.Post{{Title: "Hello world"}, {Title: "Hello again"}}
 
