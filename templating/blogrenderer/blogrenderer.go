@@ -17,6 +17,10 @@ type Post struct {
 	Tags                     []string
 }
 
+func (p Post) SanitizedTitle() string {
+	return strings.ToLower(strings.Replace(p.Title, " ", "-", -1))
+}
+
 type PostRenderer struct {
 	templ *template.Template
 }
@@ -39,13 +43,9 @@ func (r *PostRenderer) Render(w io.Writer, p Post) error {
 }
 
 func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
-	indexTemplate := `<ol>{{range .}}<li><a href="/posts/{{sanitiseTitle .Title}}">{{.Title}}</a></li>{{end}}</ol>`
+	indexTemplate := `<ol>{{range .}}<li><a href="/posts/{{.SanitizedTitle}}">{{.Title}}</a></li>{{end}}</ol>`
 
-	templ, err := template.New("index").Funcs(template.FuncMap{
-		"sanitiseTitle": func(title string) string {
-			return strings.ToLower(strings.Replace(title, " ", "-", -1))
-		},
-	}).Parse(indexTemplate)
+	templ, err := template.New("index").Parse(indexTemplate)
 	if err != nil {
 		return err
 	}
