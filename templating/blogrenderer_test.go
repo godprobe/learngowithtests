@@ -35,15 +35,15 @@ var (
 func TestRender(t *testing.T) {
 	buf := bytes.Buffer{}
 
+	postRenderer, err := blogrenderer.NewPostRenderer()
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// POST RENDERER
 	for _, post := range cases {
 		t.Run("convert a single post into HTML", func(t *testing.T) {
 			buf.Reset()
-			postRenderer, err := blogrenderer.NewPostRenderer()
-
-			if err != nil {
-				t.Fatal(err)
-			}
 
 			if err := postRenderer.Render(&buf, post); err != nil {
 				t.Fatal(err)
@@ -67,23 +67,14 @@ func TestRender(t *testing.T) {
 
 	// INDEX RENDERER
 	t.Run("render the index of posts", func(t *testing.T) {
-		buf.Reset()
-		postRenderer, err := blogrenderer.NewPostRenderer()
-		if err != nil {
-			t.Fatal(err)
-		}
-
+		buf := bytes.Buffer{}
 		posts := []blogrenderer.Post{{Title: "Hello world"}, {Title: "Hello again"}}
 
 		if err := postRenderer.RenderIndex(&buf, posts); err != nil {
 			t.Fatal(err)
 		}
 
-		got := buf.String()
-		want := `<ol><li><a href="/posts/hello-world">Hello world</a></li><li><a href="/posts/hello-again">Hello again</a></li></ol>`
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		approvals.VerifyString(t, buf.String())
 	})
 }
 
