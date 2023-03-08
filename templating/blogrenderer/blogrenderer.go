@@ -35,24 +35,9 @@ func NewPostRenderer() (*PostRenderer, error) {
 }
 
 func (r *PostRenderer) Render(w io.Writer, p Post) error {
-	if err := r.templ.Execute(w, p); err != nil {
-		return err
-	}
-
-	return nil
+	return r.templ.ExecuteTemplate(w, "blog.gohtml", p)
 }
 
 func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
-	// indexTemplate := `<ol>{{range .}}<li><a href="/posts/{{.SanitizedTitle}}">{{.Title}}</a></li>{{end}}</ol>`
-
-	// templ, err := template.New("index").Parse(indexTemplate)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// if err := templ.Execute(w, posts); err != nil {
-	// 	return err
-	// }
-
 	return r.templ.ExecuteTemplate(w, "index.gohtml", posts)
 }
