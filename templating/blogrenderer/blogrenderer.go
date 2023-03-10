@@ -4,6 +4,7 @@ import (
 	"embed"
 	"html/template"
 	"io"
+	"strings"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
@@ -13,6 +14,15 @@ var (
 	//go:embed "templates/*"
 	postTemplates embed.FS
 )
+
+type Post struct {
+	Title, Body, Description string
+	Tags	[]string
+}
+
+func (p Post) SanitizedTitle() string {
+	return strings.ToLower(strings.Replace(p.Title, " ", "-", -1))
+}
 
 type PostRenderer struct {
 	templ    *template.Template

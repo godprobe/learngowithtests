@@ -11,6 +11,7 @@ import (
 )
 
 var (
+	/*
 	cases = []struct {
 		Title       string
 		Body        string
@@ -30,6 +31,13 @@ var (
 			Tags:        []string{"tdd", "go", "experiments"},
 		},
 	}
+	*/
+	post = blogrenderer.Post{
+		Title: "this is just a test",
+		Body: "This is the body of the test post",
+		Description: "A description of the post, this is",
+		Tags: []string{"testing"},
+	}
 )
 
 func TestRender(t *testing.T) {
@@ -41,7 +49,7 @@ func TestRender(t *testing.T) {
 	}
 
 	// POST RENDERER
-	for _, post := range cases {
+	// for _, post := range cases {
 		t.Run("convert a single post into HTML", func(t *testing.T) {
 			buf.Reset()
 
@@ -51,7 +59,7 @@ func TestRender(t *testing.T) {
 
 			approvals.VerifyString(t, buf.String())
 		})
-	}
+	// }
 
 	// INDEX RENDERER
 	t.Run("render the index of posts", func(t *testing.T) {
