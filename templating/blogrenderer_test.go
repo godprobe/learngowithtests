@@ -11,12 +11,7 @@ import (
 )
 
 var (
-	cases = []struct {
-		Title       string
-		Body        string
-		Description string
-		Tags        []string
-	}{
+	cases = []blogrenderer.Post{
 		{
 			Title:       "hello world",
 			Body:        "This is a post",
@@ -35,15 +30,15 @@ var (
 func TestRender(t *testing.T) {
 	buf := bytes.Buffer{}
 
-	postRenderer, err := blogrenderer.NewPostRenderer()
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	// POST RENDERER
 	for _, post := range cases {
 		t.Run("convert a single post into HTML", func(t *testing.T) {
 			buf.Reset()
+
+			postRenderer, err := blogrenderer.NewPostRenderer()
+			if err != nil {
+				t.Fatal(err)
+			}
 
 			if err := postRenderer.Render(&buf, post); err != nil {
 				t.Fatal(err)
@@ -56,7 +51,12 @@ func TestRender(t *testing.T) {
 	// INDEX RENDERER
 	t.Run("render the index of posts", func(t *testing.T) {
 		buf := bytes.Buffer{}
-		posts := []blogrenderer.Post{{Title: "Hello world"}, {Title: "Hello again"}}
+		postRenderer, err := blogrenderer.NewPostRenderer()
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		posts := []blogrenderer.Post{{Title: "hello world"}, {Title: "a new world"}}
 
 		if err := postRenderer.RenderIndex(&buf, posts); err != nil {
 			t.Fatal(err)

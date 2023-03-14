@@ -17,7 +17,7 @@
     </div>
 </nav>
 <main>
-    <ol><li><a href="/posts/hello-world">Hello world</a></li><li><a href="/posts/hello-again">Hello again</a></li></ol>
+    <ol><li><a href="/posts/hello-world">hello world</a></li><li><a href="/posts/a-new-world">a new world</a></li></ol>
 </main>
 <footer>
     <ul>
