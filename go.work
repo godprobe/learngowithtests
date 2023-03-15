@@ -5,6 +5,7 @@ use (
 	./concurrency
 	./context
 	./dependency_injection
+	./generics
 	./hello_world
 	./intro_to_property_based_tests
 	./iteration
