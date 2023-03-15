@@ -14,14 +14,14 @@ func TestAssertFunctions(t *testing.T) {
 	})
 }
 
-func AssertEqual(t *testing.T, got, want interface{}) {
+func AssertEqual[T comparable](t *testing.T, got, want T) {
 	t.Helper()
 	if got != want {
 		t.Errorf("got %+v, want %+v", got, want)
 	}
 }
 
-func AssertNotEqual(t *testing.T, got, want interface{}) {
+func AssertNotEqual[T comparable](t *testing.T, got, want T) {
 	t.Helper()
 	if got == want {
 		t.Errorf("did not want %+v", got)
