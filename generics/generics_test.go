@@ -1,4 +1,4 @@
-package generics_tests
+package generics
 
 import "testing"
 
@@ -12,6 +12,8 @@ func TestAssertFunctions(t *testing.T) {
 		AssertEqual(t, "hello", "hello")
 		AssertNotEqual(t, "hello", "goodbye")
 	})
+
+	// AssertEqual(t, 1, "1") // uncomment to see the error
 }
 
 func AssertEqual[T comparable](t *testing.T, got, want T) {
