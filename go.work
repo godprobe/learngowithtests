@@ -2,6 +2,7 @@ go 1.19
 
 use (
 	./arrays_and_slices
+	./arrays_and_slices_revisited
 	./concurrency
 	./context
 	./dependency_injection
