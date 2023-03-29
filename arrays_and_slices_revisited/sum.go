@@ -1,28 +1,29 @@
 package main
 
-func Sum(numbers []int) int {
-	sum := 0
-	for _, number := range numbers {
-		sum += number
+func Sum[T ~int | ~float64](items []T) T {
+	var zero T
+	sum := zero
+	for _, item := range items {
+		sum += item
 	}
 	return sum
 }
 
-func SumAll(numbersToSum ...[]int) []int {
-	var sums []int // SAME AS(?) sums := []int{}
-	for _, numbers := range numbersToSum {
-		sums = append(sums, Sum(numbers))
+func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
+	var sums []T // SAME AS(?) sums := []T{}
+	for _, items := range itemsToSum {
+		sums = append(sums, Sum(items))
 	}
 	return sums
 }
 
-func SumAllTails(numbersToSum ...[]int) []int {
-	var sums []int
-	for _, numbers := range numbersToSum {
-		if len(numbers) == 0 {
+func SumAllTails[T ~int | ~float64](itemsToSum ...[]T) []T {
+	var sums []T
+	for _, items := range itemsToSum {
+		if len(items) == 0 {
 			sums = append(sums, 0)
 		} else {
-			sums = append(sums, Sum(numbers[1:]))
+			sums = append(sums, Sum(items[1:]))
 		}
 	}
 	return sums
