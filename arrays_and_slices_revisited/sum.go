@@ -1,12 +1,22 @@
 package main
 
+func Reduce[A any](items []A, accumulator func(A, A) A, initialValue A) A {
+	var result = initialValue
+	for _, item := range items {
+		result = accumulator(result, item)
+	}
+	return result
+}
+
 func Sum[T ~int | ~float64](items []T) T {
 	var zero T
-	sum := zero
-	for _, item := range items {
-		sum += item
-	}
-	return sum
+	add := func(acc, x T) T { return acc + x }
+	return Reduce(items, add, zero)
+	// sum := zero
+	// for _, item := range items {
+	// 	sum += item
+	// }
+	// return sum
 }
 
 func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
