@@ -12,29 +12,25 @@ func Sum[T ~int | ~float64](items []T) T {
 	var zero T
 	add := func(acc, x T) T { return acc + x }
 	return Reduce(items, add, zero)
-	// sum := zero
-	// for _, item := range items {
-	// 	sum += item
-	// }
-	// return sum
+}
+
+func SumAllTails[T ~int | ~float64](itemsToSum ...[]T) []T {
+	var empty []T
+	sumTail := func(acc, x []T) []T {
+		if len(x) == 0 {
+			acc = append(acc, 0)
+		} else {
+			acc = append(acc, Sum(x[1:]))
+		}
+		return acc
+	}
+	return Reduce(itemsToSum, sumTail, empty)
 }
 
 func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
 	var sums []T // SAME AS(?) sums := []T{}
 	for _, items := range itemsToSum {
 		sums = append(sums, Sum(items))
-	}
-	return sums
-}
-
-func SumAllTails[T ~int | ~float64](itemsToSum ...[]T) []T {
-	var sums []T
-	for _, items := range itemsToSum {
-		if len(items) == 0 {
-			sums = append(sums, 0)
-		} else {
-			sums = append(sums, Sum(items[1:]))
-		}
 	}
 	return sums
 }
