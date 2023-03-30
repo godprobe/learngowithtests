@@ -1,5 +1,11 @@
 package main
 
+type Transaction struct {
+	From string
+	To   string
+	Sum  float64
+}
+
 func Reduce[A any](items []A, accumulator func(A, A) A, initialValue A) A {
 	var result = initialValue
 	for _, item := range items {
@@ -33,4 +39,8 @@ func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
 		sums = append(sums, Sum(items))
 	}
 	return sums
+}
+
+func BalanceFor(transations []Transaction, name string) float64 {
+	return 0.0
 }
