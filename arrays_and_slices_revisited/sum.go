@@ -42,13 +42,13 @@ func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
 }
 
 func BalanceFor(transactions []Transaction, name string) float64 {
-	balance := 0.0
-	for _, transaction := range transactions {
-		if transaction.From == name {
-			balance -= transaction.Sum
+	var balance float64
+	for _, t := range transactions {
+		if t.From == name {
+			balance -= t.Sum
 		}
-		if transaction.To == name {
-			balance += transaction.Sum
+		if t.To == name {
+			balance += t.Sum
 		}
 	}
 	return balance
