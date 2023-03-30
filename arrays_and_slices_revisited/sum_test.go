@@ -57,3 +57,49 @@ func TestSumAllTails(t *testing.T) {
 		checkSums(t, got, want)
 	})
 }
+
+func TestReduce(t *testing.T) {
+	t.Run("multiplication of all elements", func(t *testing.T) {
+		multiply := func(x, y int) int {
+			return x * y
+		}
+
+		AssertEqual(t, Reduce([]int{1, 2, 3}, multiply, 1), 6)
+	})
+
+	t.Run("concatenate strings", func(t *testing.T) {
+		concatenate := func(x, y string) string {
+			return x + y
+		}
+
+		AssertEqual(t, Reduce([]string{"alpha", "be", "t"}, concatenate, ""), "alphabet")
+	})
+}
+
+func TestAssertFunctions(t *testing.T) {
+	t.Run("asserting on integers", func(t *testing.T) {
+		AssertEqual(t, 1, 1)
+		AssertNotEqual(t, 1, 2)
+	})
+
+	t.Run("asserting on strings", func(t *testing.T) {
+		AssertEqual(t, "hello", "hello")
+		AssertNotEqual(t, "hello", "goodbye")
+	})
+
+	// AssertEqual(t, 1, "1") // uncomment to see the error
+}
+
+func AssertEqual[T comparable](t *testing.T, got, want T) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %+v, want %+v", got, want)
+	}
+}
+
+func AssertNotEqual[T comparable](t *testing.T, got, want T) {
+	t.Helper()
+	if got == want {
+		t.Errorf("did not want %+v", got)
+	}
+}
