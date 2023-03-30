@@ -6,7 +6,7 @@ type Transaction struct {
 	Sum  float64
 }
 
-func Reduce[A any](items []A, accumulator func(A, A) A, initialValue A) A {
+func Reduce[A, B any](items []A, accumulator func(B, A) B, initialValue B) B {
 	var result = initialValue
 	for _, item := range items {
 		result = accumulator(result, item)
@@ -42,14 +42,16 @@ func SumAll[T ~int | ~float64](itemsToSum ...[]T) []T {
 }
 
 func BalanceFor(transactions []Transaction, name string) float64 {
-	var balance float64
-	for _, t := range transactions {
+	accrueBalance := func(currentBalance float64, t Transaction) float64 {
 		if t.From == name {
-			balance -= t.Sum
+			return currentBalance - t.Sum
 		}
 		if t.To == name {
-			balance += t.Sum
+			return currentBalance + t.Sum
 		}
+
+		return currentBalance
 	}
-	return balance
+
+	return Reduce(transactions, accrueBalance, 0.0)
 }
