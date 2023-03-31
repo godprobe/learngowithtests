@@ -77,6 +77,6 @@ func NewBalanceFor(acc Account, ts []Transaction) Account {
 		return currentBalance
 	}
 
-	Reduce(ts, accrueBalance, acc.Balance)
+	acc.Balance = Reduce(ts, accrueBalance, acc.Balance)
 	return acc
 }
