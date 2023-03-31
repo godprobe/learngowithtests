@@ -6,6 +6,11 @@ type Transaction struct {
 	Sum  float64
 }
 
+type Account struct {
+	Name    string
+	Balance float64
+}
+
 func Reduce[A, B any](items []A, accumulator func(B, A) B, initialValue B) B {
 	var result = initialValue
 	for _, item := range items {
@@ -54,4 +59,24 @@ func BalanceFor(transactions []Transaction, name string) float64 {
 	}
 
 	return Reduce(transactions, accrueBalance, 0.0)
+}
+
+func NewTransaction(from Account, to Account, amount float64) Transaction {
+	return Transaction{from.Name, to.Name, amount}
+}
+
+func NewBalanceFor(acc Account, ts []Transaction) Account {
+	accrueBalance := func(currentBalance float64, t Transaction) float64 {
+		if t.From == acc.Name {
+			return currentBalance - t.Sum
+		}
+		if t.To == acc.Name {
+			return currentBalance + t.Sum
+		}
+
+		return currentBalance
+	}
+
+	Reduce(ts, accrueBalance, acc.Balance)
+	return acc
 }
