@@ -62,21 +62,20 @@ func BalanceFor(transactions []Transaction, name string) float64 {
 }
 
 func NewTransaction(from Account, to Account, amount float64) Transaction {
-	return Transaction{from.Name, to.Name, amount}
+	return Transaction{From: from.Name, To: to.Name, Sum: amount}
 }
 
 func NewBalanceFor(acc Account, ts []Transaction) Account {
-	accrueBalance := func(currentBalance float64, t Transaction) float64 {
-		if t.From == acc.Name {
-			return currentBalance - t.Sum
-		}
-		if t.To == acc.Name {
-			return currentBalance + t.Sum
-		}
+	return Reduce(ts, applyTransaction, acc)
+}
 
-		return currentBalance
+func applyTransaction(acc Account, t Transaction) Account {
+	if t.From == acc.Name {
+		acc.Balance -= t.Sum
+	}
+	if t.To == acc.Name {
+		acc.Balance += t.Sum
 	}
 
-	acc.Balance = Reduce(ts, accrueBalance, acc.Balance)
 	return acc
 }
